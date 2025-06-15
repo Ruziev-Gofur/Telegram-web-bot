@@ -8,7 +8,7 @@ const course = getData()
 
 const telegram = window.Telegram.WebApp
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([])
@@ -53,6 +53,16 @@ const App = () => {
     telegram.MainButton.text = 'Sotib olish :)'
     telegram.MainButton.show()
   }
+
+  const onSendData = useCallback(() => {
+    telegram.sendData(JSON.stringify(cartItems))
+  }, [cartItems]);
+
+  useEffect(() => {
+    telegram.onEvent('mainButtonClicked', onSendData)
+
+    return() => telegram.offEvent('mainButtonClicked', onSendData)
+  }, [onSendData])
 
   return (
     <>
