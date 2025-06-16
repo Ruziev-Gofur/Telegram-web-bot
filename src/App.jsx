@@ -1,4 +1,5 @@
 
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import Card from './components/card/card'
 import Cart from './components/cart/cart'
@@ -8,7 +9,6 @@ const course = getData()
 
 const telegram = window.Telegram.WebApp
 
-import React, { useCallback, useEffect, useState } from 'react'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([])
