@@ -58,7 +58,7 @@ const App = () => {
 
     const queryID = telegram.initDataUnsafe?.query_id;
     if(queryID){
-      fatch("hhtps//localhost:8000/web-data", {
+      fetch("https://localhost:8000/web-data", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const App = () => {
         body: JSON.stringify(cartItems),
       });
     }else{
-      telegram.sendData(JSON.stringify(cartItems))
+      telegram.sendData(JSON.stringify({products: cartItems, queryID: queryID}))
     }
   }, [cartItems]);
 
